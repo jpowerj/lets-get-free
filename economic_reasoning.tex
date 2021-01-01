@@ -1,0 +1,131 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{fullpage}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{setspace}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue
+}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{tikz-qtree}
+\usetikzlibrary{calc}
+\tikzset{
+% Two node styles for game trees: solid and hollow
+solid node/.style={circle,draw,inner sep=1.5,fill=black},
+hollow node/.style={circle,draw,inner sep=1.5}
+}
+\usepackage{moresize}
+
+\title{Probabilistic, Strategic, and Economic Reasoning for Anti-Capitalists}
+\author{Jeff Jacobs}
+
+\newcommand{\strat}[1]{\textsf{#1}}
+\newcommand{\Corn}[1]{\textsc{Corn#1}}
+
+\begin{document}
+
+\maketitle
+
+\doublespacing
+
+\section{Economic Reasoning}
+
+As with the other two ``pillars'' of the book, we're going to approach economic reasoning in an extremely selective and unorthodox manner. Specifically, we're basically only going to learn enough econ to be able to work through and understand the economic arguments within John Roemer's game-changing book \textit{Free to Lose: An Introduction to Marxist Economic Philosophy} (1988). Among other things, this is the first and only text I've ever seen that actually tries to grapple with how to define/understand/model ``exploitation'' in a fully mathematically-principled way\footnote{Well, really this is true of his PhD-thesis-turned-book \textit{Analytical Foundations of Marxian Economic Theory} (1981), but \textit{Free to Lose} is the first ``layperson-accessible'' text to grapple with this stuff.}. So we'll start by working through his model showing how exploitation can emerge from a simple economy consisting of 10 people deciding how to produce the things they need to live (and how to re-produce the things they need in order to continue this production in the future, as we'll see).
+
+\subsection{The Labor-Corn Model}
+
+Imagine a group of 10 people who suddenly find themselves washed up on a deserted island, each having one tasty ear of corn and nothing else. They realize that they'll need to work a certain amount every day in order to have something to eat daily (and thus in order to not die). After searching the island for a while, they find that there are two ways they can produce more corn:
+\begin{itemize}
+    \item \textsf{Forage}: Beyond the beach there is a large forest where corn, for some reason, grows sparsely in between the inedible trees, grass, and dirt. This means that if they enter the forest with no corn they will emerge from the forest with one corn per 3 hours of searching. Somehow this proportion is infinitely divisible, such that 1.5 hours of searching will produce $\frac{1}{2}$ of a corn, 1 hour will produce $\frac{1}{3}$, 30 minutes will produce $\frac{1}{6}$, and so on.
+    \item \textsf{Factory}: In a clearing within the forest, it turns out, an abandoned corn production factory is still standing and ready to be used. In this factory however, unlike the forest, they'll need to have some corn to start with in order to produce more. Specifically, putting 1 \Corn{} in the input tube and turning a crank for 1 hour produces 2 \Corn{s}. As with \strat{Forage}, this process is infinitely divisible: inputting $\frac{1}{2}$ of a \Corn{} and working for 30 minutes produces 1 \Corn{}, inputting $\frac{1}{4}$ and working for 15 minutes produces $\frac{1}{2}$ of a \Corn{}, and so on.
+\end{itemize}
+
+An important point is in order regarding \strat{Factory}, which is due to this model being based on \href{https://en.wikipedia.org/wiki/Leontief\_production\_function}{Leontief Production Functions}. These functions model situations where one cannot arbitrarily increase labor hours or capital input to obtain more production, but instead must increase them in a given proportion. This makes sense if you imagine, for example, someone inputting 1 \Corn{} but not performing any labor and thus seeing no output. Shoving a second \Corn{} into the tube will not increase the output any more, since any amount of \Corn{} only leads to the desired output when combined with a corresponding amount of labor hours.
+
+Mathematically, then, we can write these production functions in the following form:
+\begin{align*}
+q = \min{\left\{\frac{c}{a},\frac{\ell}{b}\right\}}
+\end{align*}
+
+\subsection{Capitalism: Is It Necessarily Exploitative?}
+
+\subsection{Class, Wealth, and Exploitation}
+
+\begin{table}[ht!]
+\begin{small}
+\begin{tabular}{p{2cm}p{2cm}p{2cm}p{2cm}p{2cm}p{2cm}} \hline
+Mathematical form & Produce corn on their own? & Hire others? & Sell their labor power? & Industrial term & Agricultural term \\ \hline
+$\langle 0, 0, 0 \rangle$ & No & No & No & \textit{[suboptimal]} & \textit{[suboptimal]} \\
+$\langle 0, 0, + \rangle$ & No & No & Yes & Proletarian & Landless Peasant \\
+$\langle 0, +, 0 \rangle$ & No & Yes & No & Pure capitalist & Landlord \\
+$\langle 0, +, + \rangle$ & No & Yes & Yes & \textit{[suboptimal]} & \textit{[suboptimal]} \\
+$\langle +, 0, 0 \rangle$ & Yes & No & No & Petit bourgeois artisan & ++
+\end{tabular}
+\end{small}
+\caption{A combination and extension of Tables 6.1 and 6.2 from \cite{roemer_free_to_lose}, illustrating the connections which arise endogenously between class, wealth, and exploitation in Roemer's model.}
+\end{table}
+
+\section{Strategic Reasoning Under Uncertainty}
+
+Now we reach the holy grail: by combining what we've learned from probability theory and statistics about how to grapple with uncertainty, and what we've learned from game theory about how to model strategic interactions, we can develop a set of principled mathematical frameworks for figuring out what to do in the various highly-uncertain multi-agent situations we find ourselves in when organizing and developing political strategies.
+
+- Game Theory and Mechanism Design for Anti-Capitalists
+
+-- 1. Intro
+
+*Game Theory*: modeling strategic interactions between people. What decision(s) are in this person's best interests, given that they don't know what the other person is going to do?
+
+*Mechanism Design*: "inverse" game theory. Now we get to *create* the game (read: institution) that people will participate in. How can we create "good" games? i.e., how can we create games where good things will happen even if people act like assholes?
+
+First game theory example: [The Evolution of Trust](https://ncase.me/trust/)!
+
+Now do the ones \hyperref{https://cs.stanford.edu/~jjacobs3/Jacobs_GameTheoryAndMechanismDesign.pdf} (slides from Stanford weekend course for high school students)
+
+-- 2. More Intro
+
+Second game theory example: Schelling segregation model. [Parable of the Polygons!](https://ncase.me/polygons/)
+
+First mechanism design example: walk through the steps showing why a first-price auction is *not* a good way to auction an item. Refer to the slides from above
+
+-- 3. Actual, like, society
+
+* Stoplight game
+* Optimal queuing (whole foods, sadly, is right on this count)
+ 
+-- 4. Evolution(?)
+
+* Genetic algorithms, maybe the plane design example
+
+-- Readings:
+
+* Bowles, Samuel. *Microeconomics*
+* Gintis, Herbert. *Game Theory Evolving*
+
+\singlespacing
+
+\begin{thebibliography}{9}
+
+\section{Primary}
+
+\bibitem{bowles_microeconomics} Bowles, Samuel. \textit{Microeconomics}.
+
+\bibitem{dedeo_bayesian} DeDeo, Simon. \textit{Bayesian Reasoning for Intelligent People}. \url{http://tuvalu.santafe.edu/~simon/br.pdf}
+
+\bibitem{gintis_game_theory} Gintis, Herbert. \textit{Game Theory Evolved}.
+
+\bibitem{roemer_free_to_lose} Roemer, John. \textit{Free to Lose}.
+
+\bibitem{schelling_micromotives} Schelling, Thomas C. \textit{Micromotives and Macrobehavior}.
+
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,149 @@
+\section{Week 1: Probabilistic Reasoning}
+
+\subsection{What is a Probability?}
+
+First things first, we need to get some very basic notions of probability down on paper, before we can move into the real meat of the section, Bayesian Statistics. For the purposes of this course, a \textbf{probability} $P(X)$ is just a number between 0 and 1 representing how likely we think some event $X$ is\footnote{If you've taken a stats class in high school or undergrad, you probably learned that a probability $P(X)$ represents ``how likely the event $X$ \textit{is}''. The latter represents the ``frequentist'' philosophy of probability, but in this book we instead adopt a ``Bayesian'' philosophy, which foregrounds the model-builder (you) by treating a probability $P(X)$ as representing ``how likely \textit{we think} the event $X$ is''. Notice the subtle but important difference in wording.}. If we're flipping a coin, for example, and we have no reason to believe that the coin is biased in any way, then we can create and adopt a model of the coin called $\textsf{fair}$ in which $P(\Heads{} \given{} \fair{}) = 0.5$ (read this as ``the probability of seeing heads given the \fair{} model'') and $P(\Tails{} \given{} \fair{}) = 1 - P(\Heads{} \given{} \fair{}) = 0.5$.
+
+As a quick but important aside, the reason we only have to define $P(\Heads{} \given{} \fair{})$ here (with $P(\Tails{} \given{} \fair{})$ being automatically derived as a result) is because the full \textbf{event space} or set of all possible events is $\Omega = \{\Heads{}, \Tails{}\}$. By the rules of probability, $P(\Omega)$ or the probability of \textit{anything} happening:
+\begin{align*}
+P(\text{Event 1 in  }\Omega\text{ or Event 2 in }\Omega\text{ or Event 3 in }\Omega\text{ or }\ldots)
+\end{align*} must equal 1, for a model to be valid\footnote{Hence the equations in this paragraph look like just $P(\textsf{thing})$ rather than $P(\textsf{thing} \given{} \textsf{model})$!}. Then, knowing that the logical connectives ``and'' and ``or'' for events in a valid model must satisfy
+\begin{align*}
+P(X\text{ and }Y) &= P(X)\cdot P(Y), \\
+P(X\text{ or }Y) &= P(X) + P(Y) - P(X\text{ and }Y),
+\end{align*}
+we know that in any of our models we must have
+\begin{align*}
+P(\Omega) = P(\Heads{}\text{ or }\Tails{}) &= P(\Heads{}) + P(\Tails{}) - P(\Heads{}\text{ and }\Tails{}) \\
+&= P(\Heads{}) + P(\Tails{}) - 0 = 1,
+\end{align*}
+so that
+\begin{align*}
+P(\Tails{}) = 1 - P(\Heads{}),
+\end{align*}
+allowing us to immediately derive $P(\Tails{} \given{} \fair{})$ from our model's assertion that $P(\Heads{} \given{} \fair{}) = 0.5$\footnote{Scrupulous readers will notice that I actually snuck a model assumption into the $P(\Omega)$ line above, namely, that $P(\Heads{}\text{ and }\Tails{}) = 0$. However, if you're that scrupulous hopefully you also know that the ``atomic'' events within $\Omega$ must be mutually exclusive...}. In fact, this gives us a third rule that a valid probability model must satisfy:
+\begin{align*}
+P(\text{not }X) = 1 - P(X),
+\end{align*}
+where ``not $X$'' is shorthand for ``the event $X$ does \textit{not} happen''. In our case, since the only two possible events are \Heads{} and \Tails{},
+\begin{align*}
+P(\Tails{} \given{} \fair{}) = P(\text{not }\Heads{}\given{}\fair{}) = 1 - P(\Heads{} \given{} \fair{}) = 1 - 0.5 = 0.5.
+\end{align*}
+
+In the back of our heads, however, we can construct an alternate model of the coin called $\biased{}$, in which $P_\biased{}(\Heads{}) = 0.8$ and $P_\biased{}(\Tails{}) = 1 - 0.8 = 0.2$. Then, the beauty of Bayesian statistics is that we can go out into the world and see which model best comports with what we observe. So, if we notice that the coin keeps coming up heads a suspiciously large number of times, we can change the model we believe from $\fair{}$ to $\biased{}$. Mathematically, we would want to do so if $\likelihood{\data{} \given{} \biased{}} > \likelihood{\data{} \given{} \fair{}}$. This $\mathscr{L}$ thing literally just means ``likelihood'', and it's mathematically the same as probability but written differently to emphasize an unusual property of this calculation: usually when we write $P(X \given{} Y)$ we mean that we're computing $P(X \given{} Y)$ because we want to know how likely $X$ is in a world where we know that $Y$ happened, but in this case we're working ``in reverse'', computing $P(\data{})$ not because we're interested in that quantity in and of itself but only because we want to see how \textit{likely} this outcome was given the (varying) model on the right-hand side of the conditional bar.
+
+\subsection{Optimal Queueing: Why Whole Foods is (Sadly but Truly) the Future}
+
+Now let's apply what we learned in the previous section. Ever notice how, in grocery stores that let you choose which checkout line to wait in, the other lines always seem to go faster than the one you're in? There's a probability-theoretic reason for this! Let's start from the simplest (non-trivial) case: a grocery store with two lines $A$ and $B$. There are only two possibilities here: either $A$ moves faster than $B$, or vice-versa. Mathematically, we can represent this situation by writing out the \textbf{event space} as $\{AB, BA\}$, where the first element represents the case where $A$ moves faster than $B$ and the second elements represents the case where $B$ moves faster than $A$. Without knowing anything about the cashier or the customers in line, the best model we can develop \textit{a priori} is that these two outcomes are equally likely: $P(AB) = P(BA) = 0.5$. So, if you choose to enter line $A$, there's a 50\% chance that your line moves the fastest, and a 50\% chance that the other line $B$ moves the fastest.
+
+So far so good -- the probability that your line moves fastest is the same as the probability that some other line moves fastest. But what happens when we move to a grocery store with 3 lines, $A$, $B$, and $C$? In this case, the possible line orderings (from fastest to slowest) are $\{ABC, ACB, BAC, BCA, CAB, CBA\}$. As before, we consider all of these outcomes as equally likely. So, now what is the probability that the line you choose will be the fastest? If you choose line $A$, your line is the fastest in only two of the six possible outcomes: $ABC$ and $ACB$. Since each outcome is equally likely, each has probability $1/6$, and thus the probability that your line moves fastest, $P(ABC\text{ or }ACB) = P(ABC)+P(ACB)-P(ABC\text{ and }ACB)$, is $1/6+1/6-0 = 2/6$\footnote{Note again that $P(ABC\text{ and }ACB) = 0$, since $ABC$ and $ACB$ are disjoint events -- it can't both be the case that line $B$ moved faster than line $C$ \textit{and} line $C$ moved faster than line $B$.}. Then, using our ``not'' rule from above, the probability that your line does \textit{not} move fastest is
+\begin{align*}
+1 - P(ABC\text{ or }ACB) = 1 - (2/6) = 4/6.
+\end{align*}
+So, even with only three lines in the store, we already see that there's only a 33.3\% chance that the line we choose will go the fastest, versus a 66.6\% chance that we will see (at least) one of the other two lines moving faster...
+
+To quickly look at the case of four lines $A$, $B$, $C$, and $D$, note that now the possible events are
+\begin{align*}
+\Omega &= \{ABCD, ABDC, ACBD, ACDB, ADBC, ADCB, \\
+&\censor{= \{}BACD, BADC, BCAD, BCDA, BDAC, BDCA, \\
+&\censor{= \{}CABD, CADB, CBAD, CBDA, CDAB, CDBA, \\
+&\censor{= \{}DABC, DACB, DBAC, DBCA, DCAB, DCBA\},
+\end{align*}
+so that whichever line you enter the probability of it being fastest is only $25\%$, and the probability that you will see another line go faster is $75\%$. The logic continues in this way, such that in general if there are $N$ lines the probability that you see another line moving faster than yours is $(N-1)/N$. I used to work as a cashier at a grocery store with 10 checkout lines, putting the probability of frustration for a given customer at an astounding $9/10 = 90\%$... though obviously they all rationally calculated this in their heads and never yelled at me upon seeing one of the 9 other lines moving faster.
+
+\subsection{Bayesian Statistics: A Scary Term for an Intuitive Concept}
+
+One of the scariest sentiments in politics, to me, is the notion that someone or some group ``knows'' that they're ``right'' about something. One of the core principles that sets Marxism or anti-capitalism apart from religion and superstition\footnote{I said it explicitly in the first sentence, but from here on out basically just add ``to me'' to the beginning of all these opinionated statements, in your head. Disclaimer complete.} is the notion that we can come to hold these beliefs by looking out into the world, observing and measuring and comparing things, and updating our beliefs to incorporate whatever we learn. This is the basic intuition behind Bayesian reasoning, which puts this into practice via an ``update equation'' (which you don't have to memorize!) specifying exactly how much one should ``nudge'' their degree of belief in some proposition, thus updating their ``mental model'' of the world, given observed evidence for or against it.
+
+As simple as this seems, it turn out that Bayesian reasoning is \textit{the} optimal method for drawing inferences about social phenomena, In a mathematically-precise sense that we will discuss. For example, a Bayesian gambler will always beat a non-Bayesian given a sufficient number of bets. More on that later.
+
+\subsection{Probabilistic Graphical Models}
+
+“Probabilistic Graphical Model” or PGM is just a fancy term for a statistical tool which operationalizes an intuitive idea: when trying to understand a complex phenomenon with lots of “moving parts” interacting with one another, a good way to start analyzing it is often to break it down into its constituent parts and then specify how these parts work together to give rise to the phenomenon. With this in mind, a PGM is a collection of nodes (drawn as circles) representing variables and edges (drawn as arrows) representing relationships of influence between nodes, codified as “Conditional Probability Tables”. So, if we wanted to model the relationship between weather and a person’s choice of whether to go out and party or stay in and watch a movie on a given Saturday evening, we could use
+\begin{enumerate}
+\item[(1)] A variable $w$ representing the weather, which can take on values in $\{\Sunny{}, \Rainy{}\}$,
+\item[(2)] A variable $a$ representing the person’s action, which can take on values in $\{\GoOut{}, \StayIn{}\}$, and 
+\item[(3)] An edge $e$ from $w$ to $a$ which encodes the intuition that one is more likely to go out if it’s sunny than if it’s rainy via the probability distribution $P(a = \GoOut{} | w = \Sunny{}) = 0.8$, $P(a = \StayIn{} | w = \Sunny{}) = 0.2$, $P(a = \GoOut{} | w = \Rainy{}) = 0.1$, and $P(a = \StayIn{} | w = \Rainy{}) = 0.9$, which we can also represent as a simple Conditional Probability Table:
+\begin{center}
+\begin{tabular}{cc} \hline
+Weather (Value of $w$) & Probability of Going Out $P(a=\GoOut{} \; | \; w)$\\ \hline \hline
+\Sunny{} & 0.8 \\
+\Rainy{} & 0.1 \\\hline
+\end{tabular}
+\end{center}
+\end{enumerate}
+
+We need just one more thing before our PGM is complete, however: while we can use this Conditional Probability Table to obtain any information we want about $a$, notice that the table depends on information about $w$. Thus, to fully parameterize our PGM, we’ll need to supply a non-conditional probability table giving the initial distribution over the weather. In this case, let’s just say that there’s a 50/50 chance of rain or sunshine, so that $P(w = \Sunny{}) = 0.5$.
+
+Now we have everything we need! The resulting PGM, in graphical form, is presented in Figure 3. Pretty boring, but it gets the job done.
+
+
+\begin{figure}[!ht]
+  \centering
+  \begin{tikzpicture}[
+  %every node/.style={draw, minimum size={width("dmztp")},node distance=0.8cm},
+  every node/.style={draw, node distance=0.8cm},
+  every path/.style={thick},
+  outer/.style={draw,circle},
+  inner/.style={draw,circle,minimum size=1cm,inner sep=0},
+  metanode/.style={draw,minimum size=3cm,rounded corners=0.4cm},
+  obs/.style={fill=lightgray},
+  latent/.style={fill=white},
+  ar/.style={->,>=latex},
+  auto
+  ] %
+    %\node[outer,obs](w){$w$}; %
+    \node[outer](w){$w$};
+    \node[outer,right=of w](a){$a$};
+    %\node[outer,obs, right=of dyt, xshift=2cm](dztp){$D^z_{t+}$}; %
+    \draw[->](w) edge (a);
+    %\draw[->](sztp) edge (dztp);
+  \end{tikzpicture}
+  \label{fig:pgm-noshade}
+  \caption{A basic PGM, representing the relationship between $w$, the weather, and $a$, the subsequent action of a person deciding whether to go out or stay in for the night.}
+\end{figure}
+
+The beautiful thing about PGMs, though (and the primary reason to use them), is that you can then use this model to make inferences about the world in the face of incomplete information -- i.e., the situation in pretty much every real-world problem. The key tool here is the separation of nodes into two categories: observed (represented graphically as a shaded node) and latent (represented graphically as an unshaded node). Thus we can now use our model as a weather-inference machine: if we observe that the person we’re modeling is out at a party with us, what can we infer from this information about the weather outside? We can draw this situation as a PGM with shaded and unshaded nodes, as in Figure 4, and then use Bayes’ Rule to perform calculations over the network, to see how the observed information about the person at the party “flows” back into the node representing the weather.
+
+\begin{figure}[!ht]
+  \centering
+  \begin{tikzpicture}[
+  %every node/.style={draw, minimum size={width("dmztp")},node distance=0.8cm},
+  every node/.style={draw, node distance=0.8cm},
+  every path/.style={thick},
+  outer/.style={draw,circle},
+  inner/.style={draw,circle,minimum size=1cm,inner sep=0},
+  metanode/.style={draw,minimum size=3cm,rounded corners=0.4cm},
+  obs/.style={fill=lightgray},
+  latent/.style={fill=white},
+  ar/.style={->,>=latex},
+  auto
+  ] %
+    %\node[outer,obs](w){$w$}; %
+    \node[outer](w){$w$};
+    \node[outer,obs,right=of w](a){$a$};
+    %\node[outer,obs, right=of dyt, xshift=2cm](dztp){$D^z_{t+}$}; %
+    \draw[->](w) edge (a);
+    %\draw[->](sztp) edge (dztp);
+  \end{tikzpicture}
+  \label{fig:pgm-shaded}
+  \caption{The same situation as in Figure \ref{fig:pgm-noshade}, except that the node for variable $a$ is now shaded, indicating a situation where we have observed the person’s action ($a = Go Out$) but still only have a probability distribution over the weather $w$.}
+\end{figure}
+
+Keeping in mind that Bayes’ Rule tells us, for any two events $A$ and $B$, how to use information about $P(B|A)$ to obtain information about $P(A|B)$:
+\begin{align*}
+P(A|B) = \frac{P(B|A)P(A)}{P(B)},
+\end{align*}
+We can now apply this rule to obtain our new probability distribution over the weather, taking into account the new information that the person has chosen to go out:
+\begin{align*}
+P(w = \Sunny{} \; | \; a = \GoOut{}) &= \frac{P(a = \GoOut{} \; | \; w = \Sunny{})P(w = \Sunny{})}{P(a = \GoOut{})} \\
+&= \frac{P(a = \GoOut{} \; | \; w = \Sunny{})P(w = \Sunny{})}{P(a = \GoOut{} \; | \; w = \Sunny{}) + P(a = \GoOut{} \; | \; w = \Rainy{})}
+\end{align*}
+
+And now we simply plug in the information we already have from our conditional probability table to obtain our new (conditional) probability of interest:
+\begin{align*}
+P(w = \Sunny{} \; | \; a = \GoOut{}) &= \frac{(0.8)(0.5)}{(0.8)(0.5) + (0.1)(0.5)} = \frac{0.4}{0.4 + 0.05} = \frac{0.4}{0.45} \approx 0.89.
+\end{align*}
+
+So we have now learned something interesting from our observation! Namely: now that we’ve observed the person out at a party, the probability that it is sunny out jumps from 0.5 (called the “prior” estimate of the $w$, i.e., our best guess without any other relevant information) to 0.89 (called the “posterior” estimate of $w$)
+

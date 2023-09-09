@@ -1,0 +1,118 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{fullpage}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{setspace}
+% For fancy math script characters
+\usepackage{mathrsfs}
+% For aligning long lists in math mode
+\usepackage{censor}
+\def\censorcolor{white}\let\svcensorrule\censorrule\renewcommand\censorrule[1]{\textcolor{\censorcolor}{\svcensorrule{#1}}}
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=blue
+}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\renewcommand{\arraystretch}{1.5}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{tikz-qtree}
+\usetikzlibrary{calc}
+\tikzset{
+	% Two node styles for game trees: solid and hollow
+	solid node/.style={circle,draw,inner sep=1.5,fill=black},
+	hollow node/.style={circle,draw,inner sep=1.5}
+}
+\usetikzlibrary{matrix}
+\usetikzlibrary{fit}
+\usetikzlibrary{positioning}
+\usepackage[12pt]{moresize}
+\usepackage[backend=biber]{biblatex} % load the package
+\addbibresource{references.bib} % add a bib-reference file
+
+\title{Probabilistic, Strategic, and Economic Reasoning for Anti-Capitalists}
+\author{Jeff Jacobs}
+
+%%% CUSTOM COMMANDS
+\newcommand{\Heads}[0]{\textsf{Heads}}
+\newcommand{\Tails}[0]{\textsf{Tails}}
+\newcommand{\fair}[0]{\textsf{fair}}
+\newcommand{\biased}[0]{\textsf{biased}}
+\newcommand{\likelihood}[1]{\mathscr{L}\left(#1\right)}
+\newcommand{\given}[0]{\; | \;}
+\newcommand{\data}[0]{\textsf{data}}
+\newcommand{\GoOut}[0]{\textsf{Go Out}}
+\newcommand{\StayIn}[0]{\textsf{Stay In}}
+\newcommand{\Sunny}[0]{\textsf{Sunny}}
+\newcommand{\Rainy}[0]{\textsf{Rainy}}
+
+\newcommand{\strat}[1]{\textsf{#1}}
+% Uncomment to make "Corn" have a fancy font
+\newcommand{\Corn}[1]{\textsc{corn#1}}
+%\newcommand{\Corn}[1]{Corn#1}
+
+\begin{document}
+	
+	\maketitle
+	
+	\section*{Introduction}
+	
+	\doublespacing
+	
+	If the title of this compendium makes you laugh, you're not alone -- it's probably not clear \textit{a priori} why anti-capitalists would need (much less want) a math book specifically aimed at them. And yet, long story short, I found myself explaining certain ostensibly ``mathematical'' concepts time and time again whole organizing and working with various anti-capitalist, anti-imperialist movements. At a broad level, I also found that these concepts could be classified into three interconnected types:
+	\begin{itemize}
+		\item \textbf{Strategic}: \textit{How can we think through our enemy's potential responses to come up with an optimal course of action?},
+		\item \textbf{Probabilistic}: \textit{How can we assign and compare degrees of belief in the likelihood of these potential responses?}, and
+		\item \textbf{Economic}: \textit{How can we incorporate the costs and benefits of these actions into our strategic and probabilistic thinking, to better understand what is and isn't feasible?}
+	\end{itemize}
+	So I started putting the sections of this thing together so that I could send my written-out explanations to folks rather than ranting about them at some action or post-meeting bar. The concepts in here are variously ``rooted'' in pure math, applied math, probability, statistics, and economics, hence I just chose ``reasoning'' for the title, since despite the importance of the concepts most of those words instill fear and suspicion among leftists that you're a neoliberal or perhaps both.
+	
+	\input{prob.tex}
+	
+	\input{strat.tex}
+	
+	\input{econ.tex}
+	
+	\section{Strategic Reasoning Under Uncertainty}
+	
+	Now we reach the holy grail: by combining what we've learned from probability theory and statistics about how to grapple with uncertainty, and what we've learned from game theory about how to model strategic interactions, we can develop a set of principled mathematical frameworks for figuring out what to do in the various highly-uncertain multi-agent situations we find ourselves in when organizing and developing political strategies.
+	
+	- Game Theory and Mechanism Design for Anti-Capitalists
+	
+	-- 1. Intro
+	
+	*Game Theory*: modeling strategic interactions between people. What decision(s) are in this person's best interests, given that they don't know what the other person is going to do?
+	
+	*Mechanism Design*: "inverse" game theory. Now we get to *create* the game (read: institution) that people will participate in. How can we create "good" games? i.e., how can we create games where good things will happen even if people act like assholes?
+	
+	First game theory example: [The Evolution of Trust](https://ncase.me/trust/)!
+	
+	Now do the ones \hyperref{https://cs.stanford.edu/~jjacobs3/Jacobs_GameTheoryAndMechanismDesign.pdf} (slides from Stanford weekend course for high school students)
+	
+	-- 2. More Intro
+	
+	Second game theory example: Schelling segregation model. [Parable of the Polygons!](https://ncase.me/polygons/)
+	
+	First mechanism design example: walk through the steps showing why a first-price auction is *not* a good way to auction an item. Refer to the slides from above
+	
+	-- 3. Actual, like, society
+	
+	* Stoplight game
+	
+	
+	\singlespacing
+	
+	\nocite{*}
+	
+	\printbibliography[title={Primary Readings},keyword=primary]
+	\printbibliography[title={Additional Resources},keyword=secondary]
+	
+\end{document}

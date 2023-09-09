@@ -1,0 +1,104 @@
+\section{Economic Reasoning}
+
+As with the other two ``pillars'' of the book, we're going to approach economic reasoning in an extremely selective and unorthodox manner. Specifically, we're basically only going to learn enough econ to be able to work through and understand the economic arguments within John Roemer's game-changing book \textit{Free to Lose: An Introduction to Marxist Economic Philosophy} (1988). Among other things, this is the first and only text I've ever seen that actually tries to grapple with how to define/understand/model ``exploitation'' in a fully mathematically-principled way\footnote{Well, really this is true of his 1981 book \textit{Analytical Foundations of Marxian Economic Theory}, but \textit{Free to Lose} is the first ``layperson-accessible'' text to grapple with it, as far as I can tell.}. So we'll start by working through his model showing how exploitation can emerge from a simple economy consisting of 10 people deciding how to produce the things they need to live (and how to re-produce the things they need in order to continue this production in the future, as we'll see).
+
+\subsection{The Basic Labor-Corn Model}
+
+Imagine a group of 10 people who suddenly find themselves washed up on a deserted island, each having one tasty ear of corn and nothing else. They realize that they'll need to work a certain amount every day in order to have something to eat daily (and thus in order to not die). After searching the island for a while, they find that there are two ways they can produce more corn:
+\begin{itemize}
+	\item \textsf{Forage}: Beyond the beach there is a large forest where corn, for some reason, grows sparsely in between the inedible trees, grass, and dirt. This means that if they enter the forest and start searching (regardless of how much corn they already have on-hand), they will emerge from the forest with one new corn per 3 hours of searching. Somehow this proportion is infinitely divisible, such that 1.5 hours of searching will produce $\frac{1}{2}$ of a corn, 1 hour will produce $\frac{1}{3}$, 30 minutes will produce $\frac{1}{6}$, and so on.
+	\item \textsf{Factory}: In a clearing within the forest, it turns out, an abandoned corn production factory is still standing and ready to be used. What are the odds? Unlike in the forest, however, here our agents will need to have some corn to start with in order to produce more. Specifically, putting 1 \Corn{} in the input tube and turning a crank for 1 hour produces 2 \Corn{s} gross (1 \Corn{} net)\footnote{The difference between gross and net confuses me to no end no matter how many times I think through it, so I'm including this here in case it helps: \textit{Gross} output refers to how much comes out of the machine in total, ignoring whatever went into it as input beforehand. \textit{Net} output, on the other hand, takes into account the inputs to the process and thus instead represents the amount of \textit{additional} material produced, above and beyond the amount provided as input. So since the \strat{Factory} process requires one corn to be used up as input but spits out two corns at the end, we end up with 2 corns gross but 1 corn net.}. As with \strat{Forage}, this process is infinitely divisible: inputting $\frac{1}{2}$ of a \Corn{} and working for 30 minutes produces 1 \Corn{} gross ($\frac{1}{2}$ \Corn{} net), inputting $\frac{1}{4}$ of a \Corn{} and working for 15 minutes produces $\frac{1}{2}$ of a \Corn{} gross ($\frac{1}{4}$ of a \Corn{} net), and so on.
+\end{itemize}
+
+An important point is in order regarding \strat{Factory}, which is due to this model being based on \href{https://en.wikipedia.org/wiki/Leontief\_production\_function}{Leontief Production Functions}. These functions model situations where one cannot arbitrarily increase labor hours or capital input to obtain more production, but instead must increase them in a given proportion. This makes sense if you imagine, for example, someone inputting 1 \Corn{} but not performing any labor and thus seeing no output. Shoving a second \Corn{} into the tube will not increase the output any more, since any amount of \Corn{} only leads to the desired output when combined with a corresponding amount of labor hours.
+
+Mathematically, then, we can write these production functions in the following form. First, we can write the output of the \strat{Factory} technology (in net units of corn produced), as a function of how much corn and labor is supplied to it, as
+\begin{align*}
+	q_{\strat{Factory}}(c,\ell) = \min{\left\{\frac{c}{1},\frac{\ell}{1}\right\}} = \min\{c,\ell\}.
+\end{align*}
+Here $q_\strat{Factory}$ represents the (net) quantity of corn produced at the end of the \strat{Factory} production process as a function of $c$ and $\ell$, where $c$ represents the amount of corn put into the \strat{Factory} and $\ell$ represents the number of hours worked on that corn. If the math looks scary, remember that this is just a way for us to write out, in the most general possible terms, the details from the previous paragraphs. For example, if we plug in 1 \Corn{} and 1 hour of labor, we get the expected 1 \Corn{} net, since
+\begin{align*}
+	q_\strat{Factory}(1,1) = \min\{1,1\} = 1~\Corn{}.
+\end{align*}
+But recall also that we discussed how putting more corn into the machine without also inputting more labor will fail to increase the amount produced. In fact, that fact ``pops out of'' this mathematical formulation as well: if we input $c = 1$ \Corn{} but $\ell = 0$ hours of labor, we see that the net output is zero, as expected:
+\begin{align*}
+	q_\strat{Factory}(1,0) = \min\{1,0\} = 0~\Corn{}.
+\end{align*}
+And as well, like in the example, we are still unable to get any output even if we add a second \Corn{}:
+\begin{align*}
+	q_\strat{Factory}(2,0) = \min\{2,0\} = 0 ~\Corn{}.
+\end{align*}
+
+We can write the production function for the \strat{Forage} technology similarly, as
+\begin{align*}
+	q_\strat{Forage}(c,\ell) = \frac{1}{3}\ell.
+\end{align*}
+The absence of $c$ from the right-hand-side makes clear that, although you can take corn into the woods if you want, it plays no role in the \strat{Forage} production technology. As with the \strat{Factory} production function, this function ``implements'' the logic of our description from before: for every three hours you put into \strat{Forage}, you receive one \Corn{} (gross and net), since
+\begin{align*}
+	q_\strat{Forage}(\cdot, 3) = \frac{1}{3}(3) = 1~\Corn{},
+\end{align*}
+where the $\cdot$ in the first argument to $q_\strat{Forage}$ just indicates that the amount of corn you bring is irrelevant for the outcome.
+
+\subsection{Equilibria in the Basic Labor-Corn Model}
+
+Now that we understand the options
+
+\subsection{The General Labor-Corn Model}
+
+At this point you might be thinking, okay but are these just cooked-up examples where everything works out the way you want because you got to pick exactly the number of agents and their types? In this section, now that you have the intuition, we'll generalize everything from the previous section and show that all of the interesting dynamics hold for any economy with $N$ agents.
+
+\subsection{Agents On Their Grind in the Labor-Corn Economy}
+
+So, let's imagine ourselves as one of the agents in this economy. Hopefully you're lazy like I am so you can understand the agent preferring to only work just enough to re-generate their one \Corn{} each day, so they can spend the remainder of the day lounging on the beach.
+
+The agent's optimization problem:
+
+\begin{align}
+	\text{minimize } & Lx_i + z_i \\
+	\text{subject to } & (p-pa)x_i + [p - (pa + L)]y_i + z_i \geq pb \\
+	& pax_i + pay_i \leq p\omega_i \\
+	& Lx_i + z_i \leq 1 \\
+	& x_i > 0 \wedge y_i > 0 \wedge z_i > 0
+\end{align}
+
+Given this \textit{individual} optimization problem, we can analyze outcomes in the economy by defining corresponding \textit{aggregate} quantities
+\begin{align*}
+	x = \sum_{i=1}^N x_i, \; y = \sum_{i=1}^N y_i, \; z = \sum_{i=1}^N z_i
+\end{align*}
+
+And a price of corn $p$ represents an equilibrium in this model if, after every agent chooses their production vector $\langle x_i, y_i, z_i\rangle$, the aggregate quantities $x$, $y$, and $z$ satisfy
+\begin{align}
+	(1-a)(x+y) &\geq Nb \\
+	Ly &= z \\
+	a(x + y) &\leq \omega
+\end{align}
+
+\subsection{Capitalism: Is It Necessarily Exploitative?}
+
+\subsection{Class, Wealth, and Exploitation}
+
+\begin{table}[ht!]
+	{\fontsize{10}{10}\selectfont
+		\begin{tabularx}{\textwidth}{|p{1.6cm}||p{1.4cm}XXp{1.8cm}XXp{2.2cm}|} \hline
+			Production vector $\langle x^i, y^i, z^i\rangle$ & \multicolumn{1}{p{1.4cm}|}{Produces on her own?} & \multicolumn{1}{X|}{Hires others to produce?} & \multicolumn{1}{X|}{Sells her labor power?} & \multicolumn{1}{p{1.8cm}|}{Agricultural term} & \multicolumn{1}{X|}{Industrial term} & \multicolumn{1}{X|}{Post-Industrial term?} & Wealth \\ \hline \hline
+			\multicolumn{8}{|c|}{\textbf{Bourgeoisie} (Bosses)} \\ \hline
+			$\langle 0, +, 0 \rangle$ & No & Yes & No & Landlord & Pure capitalist & CEO & $\omega^i \geq \frac{b}{\pi}$ \\
+			& \multicolumn{7}{c|}{Doesn't need to work at all -- simply provides capital to her workers} \\ \hline
+			$\langle +, +, 0 \rangle$ & Yes & Yes & No & Rich Peasant (Kulak) & Small capitalist & Small business owner & $\frac{ba}{1-a} < \omega^i < \frac{b}{\pi}$ \\
+			& \multicolumn{7}{c|}{Not enough capital to hire workers to produce full consumption bundle} \\\hline \hline
+			%$\langle 0, +, + \rangle$ & No & Yes & Yes & \textit{[suboptimal]} & \textit{[suboptimal]} \\
+			\multicolumn{8}{|c|}{\textbf{Petit Bourgeoisie} (Independent/``Yeoman'' Workers)} \\ \hline
+			$\langle +, 0, 0 \rangle$ & Yes & No & No & Middle Peasant & Petit bourgeois artisan & Full-time Etsy seller & $\omega^i = \frac{ba}{1-a}$ \\
+			& \multicolumn{7}{c|}{Has no boss but also doesn't boss others} \\\hline \hline
+			%$\langle +, +, + \rangle$ & Yes & Yes & Yes & a & b \\
+			\multicolumn{8}{|c|}{\textbf{Proletariat} (``Typical'' Working-Class Workers)} \\ \hline
+			$\langle +, 0, + \rangle$ & Yes & No & Yes & Poor Peasant & Semi-proletarian & Uber driver after work & $0 < \omega^i < \frac{ba}{1-a}$ \\
+			& \multicolumn{7}{c|}{Has small plot of land, not enough to fully produce needs; ``Proletarianizing''} \\ \hline
+			$\langle 0, 0, + \rangle$ & No & No & Yes & Landless Peasant & Proletarian & Service worker & $\omega^i = 0$ \\
+			& \multicolumn{7}{c|}{Nothing but their labor power to sell / nothing but their chains to lose} \\ \hline
+			$\langle 0, 0, 0 \rangle$ & No & No & No & \multicolumn{4}{c|}{\textit{(suboptimal, doesn't exist in equilibrium)}} \\
+			& \multicolumn{7}{c|}{Produces nothing and starves to death... Rough} \\\hline
+		\end{tabularx}
+	}
+	\caption{A combination and extension of Tables 6.1 and 6.2 from \cite{roemer_free_to_lose}, illustrating the connections which arise endogenously between class, wealth, and exploitation in Roemer's model.}
+\end{table}
